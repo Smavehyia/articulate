@@ -4,7 +4,9 @@
   "description": "Articulate - An app to conquer all your public speaking fears",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:ui": "jest -c jest.config.js",
+    "test:ui:watch": "npm run test:ui -- --watch",
     "start": "webpack-dev-server --mode=development --open --hot",
     "build": "webpack --mode=production"
   },
@@ -24,6 +26,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
+    "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/polyfill": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
@@ -37,6 +40,8 @@
     "eslint-plugin-react-hooks": "^4.1.2",
     "html-webpack-plugin": "^4.5.0",
     "jest": "^26.4.2",
+    "jest-puppeteer": "^4.4.0",
+    "puppeteer": "^5.3.1",
     "style-loader": "^1.2.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
