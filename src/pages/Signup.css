@@ -1,0 +1,9 @@
+.form-container {
+    display: block;
+    width: 60%;
+    margin: auto
+}
+
+.form  > div {
+    margin: 1em auto;
+}
