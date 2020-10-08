@@ -16,12 +16,13 @@ const ValidateForm = (values, type = '') => {
   }
 
   if (type !== 'login') {
+    const emailRegEx = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const emailPasses = values.email.match(emailRegEx);
+
     // Email validation
     if (!values.email) {
       errors.email = 'Required';
-    } else if (
-      !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-    ) {
+    } else if (!emailPasses) {
       errors.email = 'Invalid email address';
     }
     // Confirm password validation

@@ -3,7 +3,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import './Signup.css';
 import { Formik } from 'formik';
+import { Redirect } from 'react-router-dom';
 import ValidateSignUpForm from '../services/ValidationServices';
+import SignUpCall from '../API/SignUp/SignUp';
 
 export default function SignUp() {
   return (
@@ -15,11 +17,20 @@ export default function SignUp() {
           email: '', password: '', userName: '', confirmPassword: '',
         }}
         validate={(values) => ValidateSignUpForm(values)}
-        onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            alert(JSON.stringify(values, null, 2));
-            setSubmitting(false);
-          }, 400);
+        onSubmit={async (values) => {
+          try {
+            await SignUpCall(values);
+            const token = window.localStorage.getItem('token');
+
+            if (token) {
+              return <Redirect to="/dashboard" />;
+            }
+          } catch (err) {
+            // TODO: show a popup with error
+            console.log('Sign Up error:', err);
+          }
+
+          return false;
         }}
       >
         {({
